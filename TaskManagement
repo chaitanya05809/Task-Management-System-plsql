@@ -1,0 +1,67 @@
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Username VARCHAR2(50) UNIQUE NOT NULL,
+    Password VARCHAR2(255) NOT NULL,
+    Email VARCHAR2(255) UNIQUE NOT NULL,
+    Role VARCHAR2(20) NOT NULL
+);
+
+CREATE TABLE Projects (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR2(255) NOT NULL,
+    Description VARCHAR2(2000),
+    StartDate DATE,
+    DueDate DATE,
+    Status VARCHAR2(20),
+    AssignedTo INT,
+    FOREIGN KEY (AssignedTo) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Tasks (
+    TaskID INT PRIMARY KEY,
+    ProjectID INT,
+    TaskName VARCHAR2(255) NOT NULL,
+    Description VARCHAR2(2000),
+    Priority VARCHAR2(10),
+    DueDate DATE,
+    Status VARCHAR2(20),
+    AssignedTo INT,
+    CreatedBy INT,
+    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID),
+    FOREIGN KEY (AssignedTo) REFERENCES Users(UserID),
+    FOREIGN KEY (CreatedBy) REFERENCES Users(UserID)
+);
+
+
+-- Insert sample user data
+INSERT INTO Users (UserID, Username, Password, Email, Role) VALUES
+(1, 'admin', 'admin123', 'admin@example.com', 'Admin');
+
+INSERT INTO Users (UserID, Username, Password, Email, Role) VALUES
+(2, 'user1', 'user123', 'user1@example.com', 'User');
+
+INSERT INTO Users (UserID, Username, Password, Email, Role) VALUES
+(3, 'user2', 'user234', 'user2@example.com', 'User');
+
+
+-- Insert sample project data
+INSERT INTO Projects (ProjectID, ProjectName, Description, StartDate, DueDate, Status, AssignedTo) VALUES
+(1, 'Project A', 'Develop a new mobile app', TO_DATE('2024-07-01', 'YYYY-MM-DD'), TO_DATE('2024-10-31', 'YYYY-MM-DD'), 'In Progress', 2);
+
+-- Insert sample task data
+INSERT INTO Tasks (TaskID, ProjectID, TaskName, Description, Priority, DueDate, Status, AssignedTo, CreatedBy) VALUES
+(1, 1, 'Design UI/UX', 'Create wireframes and prototypes', 'High', TO_DATE('2024-07-15', 'YYYY-MM-DD'), 'In Progress', 2, 1);
+
+INSERT INTO Tasks (TaskID, ProjectID, TaskName, Description, Priority, DueDate, Status, AssignedTo, CreatedBy) VALUES
+(2, 1, 'Develop backend API', 'Implement RESTful APIs', 'Medium', TO_DATE('2024-08-15', 'YYYY-MM-DD'), 'To Do', 3, 1);
+
+
+-- Get all projects assigned to a specific user
+SELECT * FROM Projects WHERE AssignedTo = 2;
+
+-- Get all tasks for a specific project
+SELECT * FROM Tasks WHERE ProjectID = 1;
+
+-- Update task status
+UPDATE Tasks SET Status = 'Completed' WHERE TaskID = 1;
+
