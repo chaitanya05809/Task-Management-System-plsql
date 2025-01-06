@@ -8,9 +8,10 @@ Student Of Amrutvahini College Of Engineering, T.E Electronics & Computer Engine
 ## Project Description
 This project implements a simple task management system using Oracle SQL. The system includes the following components:
 
-1)Users: Users can register and log in to the system.
-2)Projects: Users can create, view, edit, and delete projects. Each project has attributes such as name, description, start date, due date, status, and an assigned user.
-3)Tasks: Users can create, view, edit, and delete tasks associated with projects. Tasks have attributes such as name, description, priority, due date, status, assigned user, and creator.
+1)Users: Users can register and log in to the system.  
+2)Projects: Users can create, view, edit, and delete projects. Each project has attributes such as name, description, start date, due date, status, and an 
+  assigned user.  
+3)Tasks: Users can create, view, edit, and delete tasks associated with projects. Tasks have attributes such as name, description, priority, due date, status, assigned user, and creator.  
 4)User Roles: The system supports different user roles (e.g., Admin, User) with varying levels of access and permissions.
 
 ## Key Features:
